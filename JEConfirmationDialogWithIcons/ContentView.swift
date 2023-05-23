@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var isSheetVisible = false
+    
     var body: some View {
         VStack {
             Button("Activate sheet") {
@@ -16,7 +17,21 @@ struct ContentView: View {
             }
             .buttonStyle(BorderedButtonStyle())
         }
-        .modifier(JEConfirmationDialogViewModifier(isPresented: $isSheetVisible))
+        .sheetWithIcons(isPresented: $isSheetVisible) {
+            Button("Option 1") {
+                print("test")
+            }
+            Button("Option 2") {
+                print("test")
+            }
+            Button("Option 3") {
+                print("test")
+            }
+            Button("Cancel", role: .cancel) {
+                isSheetVisible = false
+            }
+        }
+//        .modifier(JEConfirmationDialogViewModifier(isPresented: $isSheetVisible))
 //        .confirmationDialog("Something", isPresented: .constant(true)) {
 //            Button("Test") {
 //
@@ -26,89 +41,120 @@ struct ContentView: View {
     }
 }
 
-struct JEConfirmationDialogViewModifier: ViewModifier {
-    @Binding var isPresented: Bool
-    
-    func body(content: Content) -> some View {
-        content
-            .fullScreenCover(isPresented: $isPresented, content: {
-                VStack(spacing: 0) {
-                    Spacer()
-                    Section {
-                        makeButton(title: "Option 1", position: .top)
-                        Divider()
-                        makeButton(title: "Option 2", position: .middle)
-                        Divider()
-                        makeButton(title: "Option 3", position: .bottom)
-                    }
-                    Spacer().frame(height: 8)
-                    Section {
-                        makeButton(title: "Cancel", action: {
-                            isPresented = false
-                            
-                        }, position: .action)
-                    }
-                }
-                .padding([.leading, .trailing])
-                .frame(maxWidth: .infinity)
-                .background(ClearBackgroundView())
-            })
+struct SheetWithIconsView<Content: View>: View {
+    var content: Content
+
+    init(@ViewBuilder content: () -> Content) {
+        self.content = content()
     }
+
+    var body: some View {
+        _VariadicView.Tree(SheetWithIconsLayout()) {
+            content
+                .buttonStyle(JEConfirmationDialogButtonStyle())
+                .labelStyle(JEConfirmationDialogLabelStyle())
+        }
+    }
+}
+
+struct SheetWithIconsLayout: _VariadicView_MultiViewRoot {
+    @Environment(\.dismiss) var dismiss
+    
+    @ViewBuilder
+    func body(children: _VariadicView.Children) -> some View {
+        let last = children.last?.id
+
+        VStack(spacing: 0) {
+            Spacer()
+            ForEach(children) { child in
+                if child.id == children.first?.id {
+                    child
+                        .cornerRadius(8, corners: [.topLeft, .topRight])
+                } else if child.id == children.last?.id {
+                    child
+                        .cornerRadius(8, corners: [.bottomLeft, .bottomRight])
+                } else {
+                    child
+                }
+
+                if child.id != last {
+                    Divider()
+                }
+            }
+        }
+        .padding([.leading, .trailing])
+        .frame(maxWidth: .infinity)
+        .background(ClearBackgroundView())
+    }
+    
     
     @ViewBuilder
     func makeButton(title: String, action: @escaping () -> () = {}, position: ContentListPosition) -> some View {
         Button(action: action) {
-            if position == .action {
-                Text(title)
-            } else {
-                Label(title, systemImage: "square.and.arrow.up")
-                    .labelStyle(JEConfirmationDialogLabelStyle())
-            }
+            Label(title, systemImage: "square.and.arrow.up")
+                .labelStyle(JEConfirmationDialogLabelStyle())
         }
-        .buttonStyle(JEConfirmationDialogButtonStyle(position: position))
+        .buttonStyle(JEConfirmationDialogButtonStyle())
+    }
+}
+
+extension View {
+    func sheetWithIcons<Content>(isPresented: Binding<Bool>, transition: AnyTransition = .opacity, @ViewBuilder content: @escaping () -> Content) -> some View where Content : View {
+        
+        ZStack {
+            if isPresented.wrappedValue {
+                Color.primary.opacity(0.2)
+                    .ignoresSafeArea()
+//                    .onTapGesture {
+//                        isPresented = false
+//                    }
+            }
+            self
+                .fullScreenCover(isPresented: isPresented, content: {
+                    SheetWithIconsView(content: content)
+                })
+        }
     }
 }
 
 struct JEConfirmationDialogButtonStyle: ButtonStyle {
-    let position: ContentListPosition
-    let corners: UIRectCorner
-    let material: Material
+//    let position: ContentListPosition
+    let corners: UIRectCorner = .allCorners
     
-    init(position: ContentListPosition) {
-        self.position = position
-        switch position {
-        case .top:
-            corners = [.topLeft, .topRight]
-        case .middle:
-            corners = []
-        case .bottom:
-            corners = [.bottomLeft, .bottomRight]
-        case .action:
-            corners = [.allCorners]
-        }
-        
-        switch position {
-        case .action:
-            material = .ultraThickMaterial
-        default:
-            material = .regularMaterial
-        }
-    }
+//    init(position: ContentListPosition) {
+//        self.position = position
+//        switch position {
+//        case .top:
+//            corners = [.topLeft, .topRight]
+//        case .middle:
+//            corners = []
+//        case .bottom:
+//            corners = [.bottomLeft, .bottomRight]
+//        case .action:
+//            corners = [.allCorners]
+//        }
+//    }
     
     func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .font(.title3)
-            .frame(maxWidth: .infinity)
-            .padding([.top, .bottom], 16)
-            .foregroundColor(.accentColor)
-            .fontWeight(position == .action ? .medium : .regular)
-            .background(material)
-            .overlay(content: {
-                if configuration.isPressed {
-                    Color.gray.opacity(0.5)
-                }
-            })
-            .cornerRadius(8, corners: corners)
+        let material: Material = configuration.role == .cancel ? .ultraThickMaterial : .regularMaterial
+        
+        VStack {
+            if configuration.role == .cancel {
+                Spacer().frame(height: 10)
+            }
+            configuration.label
+                .font(.title3)
+                .frame(maxWidth: .infinity)
+                .padding([.top, .bottom], 16)
+                .foregroundColor(.accentColor)
+                .fontWeight(configuration.role == .cancel ? .medium : .regular)
+                .background(material)
+                .overlay(content: {
+                    if configuration.isPressed {
+                        Color.gray.opacity(0.5)
+                    }
+                })
+        }
     }
 }
 
@@ -134,7 +180,6 @@ enum ContentListPosition {
     case top
     case middle
     case bottom
-    case action
 }
 
 extension View {
