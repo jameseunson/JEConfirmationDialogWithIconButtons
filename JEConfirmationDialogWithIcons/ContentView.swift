@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State var isSheetVisible = false
+    @State var isLabelSheetVisible = false
     
     var body: some View {
         VStack {
@@ -16,22 +17,45 @@ struct ContentView: View {
                 isSheetVisible = true
             }
             .buttonStyle(BorderedButtonStyle())
+            Button("Activate sheet with label buttons") {
+                isLabelSheetVisible = true
+            }
+            .buttonStyle(BorderedButtonStyle())
         }
         .sheetWithIcons(isPresented: $isSheetVisible) {
-            Button("Option 1") {
+            JEConfirmationDialogButton("Option 1") {
                 print("test")
             }
-            Button("Option 2") {
+            JEConfirmationDialogButton("Option 2") {
                 print("test")
             }
-            Button("Option 3") {
+            JEConfirmationDialogButton("Option 3") {
                 print("test")
             }
-            Button("Cancel", role: .cancel) {
+            JEConfirmationDialogButton("Cancel", role: .cancel) {
                 isSheetVisible = false
             }
         }
-//        .modifier(JEConfirmationDialogViewModifier(isPresented: $isSheetVisible))
+        .sheetWithIcons(isPresented: $isLabelSheetVisible) {
+            JEConfirmationDialogButton {
+                print("test")
+            } label: {
+                Label("Option 1", systemImage: "star")
+            }
+            JEConfirmationDialogButton {
+                print("test")
+            } label: {
+                Label("Option 2", systemImage: "star")
+            }
+            JEConfirmationDialogButton {
+                print("test")
+            } label: {
+                Label("Option 3", systemImage: "star")
+            }
+            JEConfirmationDialogButton("Cancel", role: .cancel) {
+                isLabelSheetVisible = false
+            }
+        }
 //        .confirmationDialog("Something", isPresented: .constant(true)) {
 //            Button("Test") {
 //
@@ -63,30 +87,34 @@ struct SheetWithIconsLayout: _VariadicView_MultiViewRoot {
     @ViewBuilder
     func body(children: _VariadicView.Children) -> some View {
         let last = children.last?.id
+        let options = children.filter { $0[JEConfirmationDialogButtonRoleTrait.self] == .noRole }
+        let cancel = children.filter { $0[JEConfirmationDialogButtonRoleTrait.self] == .hasRole(.cancel) }
 
         VStack(spacing: 0) {
             Spacer()
-            ForEach(children) { child in
-                if child.id == children.first?.id {
-                    child
-                        .cornerRadius(8, corners: [.topLeft, .topRight])
-                } else if child.id == children.last?.id {
-                    child
-                        .cornerRadius(8, corners: [.bottomLeft, .bottomRight])
-                } else {
-                    child
-                }
+            ForEach(options) { child in
+                child
+                    .cornerRadius(8, corners: JEConfirmationDialogButtonType.corners(for: options.childType(for: child)))
+                    .simultaneousGesture(TapGesture().onEnded { _ in
+                        dismiss()
+                    })
 
                 if child.id != last {
                     Divider()
                 }
             }
+            ForEach(cancel) { child in
+                child
+                    .cornerRadius(8, corners: JEConfirmationDialogButtonType.corners(for: .cancel))
+                    .padding(.top, 10)
+            }
         }
         .padding([.leading, .trailing])
         .frame(maxWidth: .infinity)
-        .background(ClearBackgroundView())
+        .background(ClearBackgroundView().onTapGesture(perform: {
+            dismiss()
+        }))
     }
-    
     
     @ViewBuilder
     func makeButton(title: String, action: @escaping () -> () = {}, position: ContentListPosition) -> some View {
@@ -99,49 +127,25 @@ struct SheetWithIconsLayout: _VariadicView_MultiViewRoot {
 }
 
 extension View {
-    func sheetWithIcons<Content>(isPresented: Binding<Bool>, transition: AnyTransition = .opacity, @ViewBuilder content: @escaping () -> Content) -> some View where Content : View {
-        
+    public func sheetWithIcons<A>(isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ViewBuilder actions: @escaping () -> A) -> some View where A : View {
         ZStack {
             if isPresented.wrappedValue {
                 Color.primary.opacity(0.2)
                     .ignoresSafeArea()
-//                    .onTapGesture {
-//                        isPresented = false
-//                    }
             }
             self
                 .fullScreenCover(isPresented: isPresented, content: {
-                    SheetWithIconsView(content: content)
+                    SheetWithIconsView(content: actions)
                 })
         }
     }
 }
 
 struct JEConfirmationDialogButtonStyle: ButtonStyle {
-//    let position: ContentListPosition
-    let corners: UIRectCorner = .allCorners
-    
-//    init(position: ContentListPosition) {
-//        self.position = position
-//        switch position {
-//        case .top:
-//            corners = [.topLeft, .topRight]
-//        case .middle:
-//            corners = []
-//        case .bottom:
-//            corners = [.bottomLeft, .bottomRight]
-//        case .action:
-//            corners = [.allCorners]
-//        }
-//    }
-    
     func makeBody(configuration: Configuration) -> some View {
         let material: Material = configuration.role == .cancel ? .ultraThickMaterial : .regularMaterial
         
         VStack {
-            if configuration.role == .cancel {
-                Spacer().frame(height: 10)
-            }
             configuration.label
                 .font(.title3)
                 .frame(maxWidth: .infinity)
@@ -214,5 +218,98 @@ struct ClearBackgroundView: UIViewRepresentable {
             superview?.superview?.backgroundColor = .clear
         }
         
+    }
+}
+
+extension View {
+    func roleTrait(_ value: JEConfirmationDialogButtonRoleTrait) -> some View {
+        _trait(JEConfirmationDialogButtonRoleTrait.self, value)
+    }
+}
+
+struct JEConfirmationDialogButton<Label>: View where Label: View {
+    var action: () -> Void
+    var label: () -> Label
+    let role: ButtonRole?
+
+    init(action: @escaping () -> Void, @ViewBuilder label: @escaping () -> Label, role: ButtonRole? = nil) {
+        self.action = action
+        self.label = label
+        self.role = role
+    }
+
+    
+    var body: some View {
+        Button(role: role, action: action, label: label)
+            .roleTrait(role == .cancel ? .hasRole(.cancel) : .noRole)
+    }
+}
+
+extension JEConfirmationDialogButton where Label == Text {
+    init(_ titleKey: LocalizedStringKey, action: @escaping () -> Void) {
+        self.action = action
+        self.label = { Text(titleKey) }
+        self.role = nil
+    }
+
+    init<S>(_ title: S, action: @escaping () -> Void) where S : StringProtocol {
+        self.action = action
+        self.label = { Text(title) }
+        self.role = nil
+    }
+    init(_ titleKey: LocalizedStringKey, role: ButtonRole?, action: @escaping () -> Void) {
+        self.action = action
+        self.label = { Text(titleKey) }
+        self.role = role
+    }
+
+    init<S>(_ title: S, role: ButtonRole?, action: @escaping () -> Void) where S : StringProtocol {
+        self.action = action
+        self.label = { Text(title) }
+        self.role = role
+    }
+}
+
+enum JEConfirmationDialogButtonRoleTrait: _ViewTraitKey, Equatable {
+    static var defaultValue: JEConfirmationDialogButtonRoleTrait = .noRole
+    
+    case hasRole(JEConfirmationDialogButtonRole)
+    case noRole
+}
+
+enum JEConfirmationDialogButtonRole {
+    case cancel
+    case destructive
+}
+
+enum JEConfirmationDialogButtonType {
+    case top
+    case middle
+    case bottom
+    case cancel
+    
+    static func corners(for type: JEConfirmationDialogButtonType) -> UIRectCorner {
+        switch type {
+        case .top:
+            return [.topLeft, .topRight]
+        case .middle:
+            return []
+        case .bottom:
+            return [.bottomLeft, .bottomRight]
+        case .cancel:
+            return [.allCorners]
+        }
+    }
+}
+
+extension Array where Element == _VariadicView_Children.Element {
+    func childType(for child: _VariadicView_Children.Element) -> JEConfirmationDialogButtonType {
+        var childType: JEConfirmationDialogButtonType = .middle
+        if child.id == self.first?.id {
+            childType = .top
+        } else if child.id == self.last?.id {
+            childType = .bottom
+        }
+        return childType
     }
 }
