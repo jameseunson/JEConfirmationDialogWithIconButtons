@@ -8,35 +8,52 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var isSystemSheetVisible = false
     @State var isSheetVisible = false
     @State var isLabelSheetVisible = false
     
     var body: some View {
         VStack {
+            Button("Activate system sheet") {
+                isSystemSheetVisible = true
+            }
             Button("Activate sheet") {
                 isSheetVisible = true
             }
-            .buttonStyle(BorderedButtonStyle())
             Button("Activate sheet with label buttons") {
                 isLabelSheetVisible = true
             }
-            .buttonStyle(BorderedButtonStyle())
         }
-        .sheetWithIcons(isPresented: $isSheetVisible) {
+        .buttonStyle(BorderedButtonStyle())
+        .confirmationDialog("Test Sheet 1", isPresented: $isSystemSheetVisible, titleVisibility: .visible) {
+            Button("Option 1") {
+                print("test")
+            }
+            Button("Option 2") {
+                print("test")
+            }
+            Button("Option 3", role: .destructive) {
+                print("test")
+            }
+            Button("Cancel", role: .cancel) {
+                print("test")
+            }
+        }
+        .sheetWithIcons("Test Sheet 2", isPresented: $isSheetVisible) {
             JEConfirmationDialogButton("Option 1") {
                 print("test")
             }
             JEConfirmationDialogButton("Option 2") {
                 print("test")
             }
-            JEConfirmationDialogButton("Option 3") {
+            JEConfirmationDialogButton("Option 3", role: .destructive) {
                 print("test")
             }
             JEConfirmationDialogButton("Cancel", role: .cancel) {
                 isSheetVisible = false
             }
         }
-        .sheetWithIcons(isPresented: $isLabelSheetVisible) {
+        .sheetWithIcons("Test Sheet 3", isPresented: $isLabelSheetVisible) {
             JEConfirmationDialogButton {
                 print("test")
             } label: {
@@ -47,33 +64,63 @@ struct ContentView: View {
             } label: {
                 Label("Option 2", systemImage: "star")
             }
-            JEConfirmationDialogButton {
+            JEConfirmationDialogButton(action: {
                 print("test")
-            } label: {
+            }, label: {
                 Label("Option 3", systemImage: "star")
-            }
+            },
+            role: .destructive)
             JEConfirmationDialogButton("Cancel", role: .cancel) {
                 isLabelSheetVisible = false
             }
         }
-//        .confirmationDialog("Something", isPresented: .constant(true)) {
-//            Button("Test") {
-//
-//            }
-//        }
+    }
+}
 
+extension View {
+    public func sheetWithIcons<A>(_ titleKey: LocalizedStringKey, isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ViewBuilder actions: @escaping () -> A) -> some View where A : View {
+        
+        sheetWithIcons(Text(titleKey), isPresented: isPresented, actions: actions)
+    }
+
+    public func sheetWithIcons<S, A>(_ title: S, isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ViewBuilder actions: @escaping () -> A) -> some View where S : StringProtocol, A : View {
+        
+        sheetWithIcons(Text(title), isPresented: isPresented, actions: actions)
+    }
+    
+    public func sheetWithIcons<A>(_ title: Text, isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ViewBuilder actions: @escaping () -> A) -> some View where A : View {
+        
+        ZStack {
+            if isPresented.wrappedValue {
+                Color.primary.opacity(0.2)
+                    .ignoresSafeArea()
+            }
+            self
+                .saturation(isPresented.wrappedValue ? 0 : 1)
+                .contrast(isPresented.wrappedValue ? 0.7 : 1)
+                .fullScreenCover(isPresented: isPresented, content: {
+                    SheetWithIconsView(content: actions,
+                                       title: title,
+                                       titleVisibility: titleVisibility)
+                })
+        }
     }
 }
 
 struct SheetWithIconsView<Content: View>: View {
-    var content: Content
+    let content: Content
+    let title: Text
+    let titleVisibility: Visibility
 
-    init(@ViewBuilder content: () -> Content) {
+    init(@ViewBuilder content: () -> Content, title: Text, titleVisibility: Visibility) {
         self.content = content()
+        self.title = title
+        self.titleVisibility = titleVisibility
     }
 
     var body: some View {
-        _VariadicView.Tree(SheetWithIconsLayout()) {
+        _VariadicView.Tree(SheetWithIconsLayout(title: title,
+                                                titleVisibility: titleVisibility)) {
             content
                 .buttonStyle(JEConfirmationDialogButtonStyle())
                 .labelStyle(JEConfirmationDialogLabelStyle())
@@ -82,11 +129,13 @@ struct SheetWithIconsView<Content: View>: View {
 }
 
 struct SheetWithIconsLayout: _VariadicView_MultiViewRoot {
+    let title: Text
+    let titleVisibility: Visibility
+    
     @Environment(\.dismiss) var dismiss
     
     @ViewBuilder
     func body(children: _VariadicView.Children) -> some View {
-        let last = children.last?.id
         let options = children.filter { $0[JEConfirmationDialogButtonRoleTrait.self] == .noRole }
         let cancel = children.filter { $0[JEConfirmationDialogButtonRoleTrait.self] == .hasRole(.cancel) }
 
@@ -99,7 +148,7 @@ struct SheetWithIconsLayout: _VariadicView_MultiViewRoot {
                         dismiss()
                     })
 
-                if child.id != last {
+                if child.id != options.last?.id {
                     Divider()
                 }
             }
@@ -109,35 +158,11 @@ struct SheetWithIconsLayout: _VariadicView_MultiViewRoot {
                     .padding(.top, 10)
             }
         }
-        .padding([.leading, .trailing])
+        .padding([.leading, .trailing], 10)
         .frame(maxWidth: .infinity)
         .background(ClearBackgroundView().onTapGesture(perform: {
             dismiss()
         }))
-    }
-    
-    @ViewBuilder
-    func makeButton(title: String, action: @escaping () -> () = {}, position: ContentListPosition) -> some View {
-        Button(action: action) {
-            Label(title, systemImage: "square.and.arrow.up")
-                .labelStyle(JEConfirmationDialogLabelStyle())
-        }
-        .buttonStyle(JEConfirmationDialogButtonStyle())
-    }
-}
-
-extension View {
-    public func sheetWithIcons<A>(isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ViewBuilder actions: @escaping () -> A) -> some View where A : View {
-        ZStack {
-            if isPresented.wrappedValue {
-                Color.primary.opacity(0.2)
-                    .ignoresSafeArea()
-            }
-            self
-                .fullScreenCover(isPresented: isPresented, content: {
-                    SheetWithIconsView(content: actions)
-                })
-        }
     }
 }
 
@@ -150,7 +175,7 @@ struct JEConfirmationDialogButtonStyle: ButtonStyle {
                 .font(.title3)
                 .frame(maxWidth: .infinity)
                 .padding([.top, .bottom], 16)
-                .foregroundColor(.accentColor)
+                .foregroundColor(configuration.role == .destructive ? .red : .accentColor)
                 .fontWeight(configuration.role == .cancel ? .medium : .regular)
                 .background(material)
                 .overlay(content: {
@@ -193,7 +218,6 @@ extension View {
 }
 
 struct RoundedCorner: Shape {
-
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
 
@@ -208,16 +232,13 @@ struct ClearBackgroundView: UIViewRepresentable {
         return InnerView()
     }
     
-    func updateUIView(_ uiView: UIView, context: Context) {
-    }
+    func updateUIView(_ uiView: UIView, context: Context) {}
     
     private class InnerView: UIView {
         override func didMoveToWindow() {
             super.didMoveToWindow()
-            
             superview?.superview?.backgroundColor = .clear
         }
-        
     }
 }
 
