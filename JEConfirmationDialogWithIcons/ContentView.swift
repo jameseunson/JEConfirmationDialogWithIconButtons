@@ -11,7 +11,7 @@ struct ContentView: View {
     @State var isSystemSheetVisible = false
     @State var isSheetVisible = false
     @State var isLabelSheetVisible = false
-    
+
     var body: some View {
         VStack {
             Button("Activate system sheet") {
@@ -38,8 +38,10 @@ struct ContentView: View {
             Button("Cancel", role: .cancel) {
                 print("test")
             }
+        } message: {
+            Text("Hello, this is a message")
         }
-        .sheetWithIcons("Test Sheet 2", isPresented: $isSheetVisible) {
+        .sheetWithIcons("Test Sheet 2", isPresented: $isSheetVisible, titleVisibility: .visible) {
             JEConfirmationDialogButton("Option 1") {
                 print("test")
             }
@@ -52,8 +54,10 @@ struct ContentView: View {
             JEConfirmationDialogButton("Cancel", role: .cancel) {
                 isSheetVisible = false
             }
+        } message: {
+            Text("Hello, this is a message")
         }
-        .sheetWithIcons("Test Sheet 3", isPresented: $isLabelSheetVisible) {
+        .sheetWithIcons("Test Sheet 3", isPresented: $isLabelSheetVisible, titleVisibility: .visible) {
             JEConfirmationDialogButton {
                 print("test")
             } label: {
@@ -73,24 +77,45 @@ struct ContentView: View {
             JEConfirmationDialogButton("Cancel", role: .cancel) {
                 isLabelSheetVisible = false
             }
+        } message: {
+            Text("Hello, this is a message")
         }
     }
 }
 
 extension View {
-    public func sheetWithIcons<A>(_ titleKey: LocalizedStringKey, isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ViewBuilder actions: @escaping () -> A) -> some View where A : View {
-        
-        sheetWithIcons(Text(titleKey), isPresented: isPresented, actions: actions)
+    public func sheetWithIcons<A>(_ titleKey: LocalizedStringKey, isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ViewBuilder actions: @escaping () -> A) -> some View where A: View {
+
+        sheetWithIcons(Text(titleKey), isPresented: isPresented, titleVisibility: titleVisibility, actions: actions)
     }
 
-    public func sheetWithIcons<S, A>(_ title: S, isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ViewBuilder actions: @escaping () -> A) -> some View where S : StringProtocol, A : View {
-        
-        sheetWithIcons(Text(title), isPresented: isPresented, actions: actions)
+    public func sheetWithIcons<S, A>(_ title: S, isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ViewBuilder actions: @escaping () -> A) -> some View where S: StringProtocol, A: View {
+
+        sheetWithIcons(Text(title), isPresented: isPresented, titleVisibility: titleVisibility, actions: actions)
     }
-    
-    public func sheetWithIcons<A>(_ title: Text, isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ViewBuilder actions: @escaping () -> A) -> some View where A : View {
-        
-        ZStack {
+
+    public func sheetWithIcons<A>(_ title: Text, isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ViewBuilder actions: @escaping () -> A) -> some View where A: View {
+
+        createSheetWithIcons(isPresented, actions, title, titleVisibility)
+    }
+
+    public func sheetWithIcons<A, M>(_ titleKey: LocalizedStringKey, isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ViewBuilder actions: @escaping () -> A, @ViewBuilder message: @escaping () -> M) -> some View where A: View, M: View {
+
+        sheetWithIcons(Text(titleKey), isPresented: isPresented, titleVisibility: titleVisibility, actions: actions, message: message)
+    }
+
+    public func sheetWithIcons<S, A, M>(_ title: S, isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ViewBuilder actions: @escaping () -> A, @ViewBuilder message: @escaping () -> M) -> some View where S: StringProtocol, A: View, M: View {
+
+        sheetWithIcons(Text(title), isPresented: isPresented, titleVisibility: titleVisibility, actions: actions, message: message)
+    }
+
+    public func sheetWithIcons<A, M>(_ title: Text, isPresented: Binding<Bool>, titleVisibility: Visibility = .automatic, @ViewBuilder actions: @escaping () -> A, @ViewBuilder message: @escaping () -> M) -> some View where A: View, M: View {
+
+        createSheetWithIcons(isPresented, actions, title, titleVisibility)
+    }
+
+    fileprivate func createSheetWithIcons<Content: View>(_ isPresented: Binding<Bool>, _ actions: @escaping () -> Content, _ title: Text, _ titleVisibility: Visibility) -> some View {
+        return ZStack {
             if isPresented.wrappedValue {
                 Color.primary.opacity(0.2)
                     .ignoresSafeArea()
@@ -111,16 +136,19 @@ struct SheetWithIconsView<Content: View>: View {
     let content: Content
     let title: Text
     let titleVisibility: Visibility
+    let message: () -> Content?
 
-    init(@ViewBuilder content: () -> Content, title: Text, titleVisibility: Visibility) {
+    init(@ViewBuilder content: () -> Content, @ViewBuilder message: @escaping () -> Content? = { nil }, title: Text, titleVisibility: Visibility) {
         self.content = content()
         self.title = title
         self.titleVisibility = titleVisibility
+        self.message = message
     }
 
     var body: some View {
         _VariadicView.Tree(SheetWithIconsLayout(title: title,
-                                                titleVisibility: titleVisibility)) {
+                                                titleVisibility: titleVisibility,
+                                                message: message)) {
             content
                 .buttonStyle(JEConfirmationDialogButtonStyle())
                 .labelStyle(JEConfirmationDialogLabelStyle())
@@ -128,12 +156,19 @@ struct SheetWithIconsView<Content: View>: View {
     }
 }
 
-struct SheetWithIconsLayout: _VariadicView_MultiViewRoot {
+struct SheetWithIconsLayout<Content: View>: _VariadicView_MultiViewRoot {
     let title: Text
     let titleVisibility: Visibility
-    
+    let message: Content
+
+    init(title: Text, titleVisibility: Visibility, @ViewBuilder message: () -> Content) {
+        self.title = title
+        self.titleVisibility = titleVisibility
+        self.message = message()
+    }
+
     @Environment(\.dismiss) var dismiss
-    
+
     @ViewBuilder
     func body(children: _VariadicView.Children) -> some View {
         let options = children.filter { $0[JEConfirmationDialogButtonRoleTrait.self] == .noRole }
@@ -141,9 +176,19 @@ struct SheetWithIconsLayout: _VariadicView_MultiViewRoot {
 
         VStack(spacing: 0) {
             Spacer()
+            if titleVisibility == .visible {
+                title
+                    .font(.caption)
+                    .frame(maxWidth: .infinity)
+                    .padding([.top, .bottom], 14)
+                    .foregroundColor(.secondary)
+                    .background(.regularMaterial)
+                    .cornerRadius(8, corners: JEConfirmationDialogButtonType.corners(for: .top))
+                Divider()
+            }
             ForEach(options) { child in
                 child
-                    .cornerRadius(8, corners: JEConfirmationDialogButtonType.corners(for: options.childType(for: child)))
+                    .cornerRadius(8, corners: JEConfirmationDialogButtonType.corners(for: options.childType(for: child, titleVisible: titleVisibility == .visible)))
                     .simultaneousGesture(TapGesture().onEnded { _ in
                         dismiss()
                     })
@@ -169,7 +214,7 @@ struct SheetWithIconsLayout: _VariadicView_MultiViewRoot {
 struct JEConfirmationDialogButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         let material: Material = configuration.role == .cancel ? .ultraThickMaterial : .regularMaterial
-        
+
         VStack {
             configuration.label
                 .font(.title3)
@@ -231,9 +276,9 @@ struct ClearBackgroundView: UIViewRepresentable {
     func makeUIView(context: Context) -> UIView {
         return InnerView()
     }
-    
+
     func updateUIView(_ uiView: UIView, context: Context) {}
-    
+
     private class InnerView: UIView {
         override func didMoveToWindow() {
             super.didMoveToWindow()
@@ -259,7 +304,6 @@ struct JEConfirmationDialogButton<Label>: View where Label: View {
         self.role = role
     }
 
-    
     var body: some View {
         Button(role: role, action: action, label: label)
             .roleTrait(role == .cancel ? .hasRole(.cancel) : .noRole)
@@ -273,7 +317,7 @@ extension JEConfirmationDialogButton where Label == Text {
         self.role = nil
     }
 
-    init<S>(_ title: S, action: @escaping () -> Void) where S : StringProtocol {
+    init<S>(_ title: S, action: @escaping () -> Void) where S: StringProtocol {
         self.action = action
         self.label = { Text(title) }
         self.role = nil
@@ -284,7 +328,7 @@ extension JEConfirmationDialogButton where Label == Text {
         self.role = role
     }
 
-    init<S>(_ title: S, role: ButtonRole?, action: @escaping () -> Void) where S : StringProtocol {
+    init<S>(_ title: S, role: ButtonRole?, action: @escaping () -> Void) where S: StringProtocol {
         self.action = action
         self.label = { Text(title) }
         self.role = role
@@ -293,7 +337,7 @@ extension JEConfirmationDialogButton where Label == Text {
 
 enum JEConfirmationDialogButtonRoleTrait: _ViewTraitKey, Equatable {
     static var defaultValue: JEConfirmationDialogButtonRoleTrait = .noRole
-    
+
     case hasRole(JEConfirmationDialogButtonRole)
     case noRole
 }
@@ -308,7 +352,7 @@ enum JEConfirmationDialogButtonType {
     case middle
     case bottom
     case cancel
-    
+
     static func corners(for type: JEConfirmationDialogButtonType) -> UIRectCorner {
         switch type {
         case .top:
@@ -324,10 +368,14 @@ enum JEConfirmationDialogButtonType {
 }
 
 extension Array where Element == _VariadicView_Children.Element {
-    func childType(for child: _VariadicView_Children.Element) -> JEConfirmationDialogButtonType {
+    func childType(for child: _VariadicView_Children.Element, titleVisible: Bool) -> JEConfirmationDialogButtonType {
         var childType: JEConfirmationDialogButtonType = .middle
         if child.id == self.first?.id {
-            childType = .top
+            if titleVisible {
+                childType = .middle
+            } else {
+                childType = .top
+            }
         } else if child.id == self.last?.id {
             childType = .bottom
         }
