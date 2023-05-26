@@ -54,13 +54,6 @@ struct ContentView: View {
 
 <img src="Assets/example.jpg" width="300" alt="An example sheet using this framework with three options, with an icon alongside each one.">
 
-
-### Examples
-
-Check out the [example app](https://github.com/aheze/SwipeActions/archive/refs/heads/main.zip) for all examples and advanced usage!
-
-![2 screenshots of the example app](Assets/ExampleApp.png)
-
 ### License
 
 ```
