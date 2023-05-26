@@ -7,61 +7,57 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A12B7BC2A1B3C62003E40E4 /* JEConfirmationDialogWithIconsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A12B7BB2A1B3C62003E40E4 /* JEConfirmationDialogWithIconsApp.swift */; };
-		1A12B7BE2A1B3C62003E40E4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A12B7BD2A1B3C62003E40E4 /* ContentView.swift */; };
-		1A12B7C02A1B3C63003E40E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A12B7BF2A1B3C63003E40E4 /* Assets.xcassets */; };
-		1A12B7C32A1B3C63003E40E4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A12B7C22A1B3C63003E40E4 /* Preview Assets.xcassets */; };
-		1A12B7CD2A1B3C63003E40E4 /* JEConfirmationDialogWithIconsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A12B7CC2A1B3C63003E40E4 /* JEConfirmationDialogWithIconsTests.swift */; };
-		1A12B7D72A1B3C63003E40E4 /* JEConfirmationDialogWithIconsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A12B7D62A1B3C63003E40E4 /* JEConfirmationDialogWithIconsUITests.swift */; };
-		1A12B7D92A1B3C63003E40E4 /* JEConfirmationDialogWithIconsUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A12B7D82A1B3C63003E40E4 /* JEConfirmationDialogWithIconsUITestsLaunchTests.swift */; };
+		1A510E052A20AC050049FC5F /* JEConfirmationDialogWithIconButtonsExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A510E042A20AC050049FC5F /* JEConfirmationDialogWithIconButtonsExampleApp.swift */; };
+		1A510E072A20AC050049FC5F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A510E062A20AC050049FC5F /* ContentView.swift */; };
+		1A510E092A20AC060049FC5F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A510E082A20AC060049FC5F /* Assets.xcassets */; };
+		1A510E0C2A20AC060049FC5F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A510E0B2A20AC060049FC5F /* Preview Assets.xcassets */; };
+		1A510E2F2A20ACF00049FC5F /* JEConfirmationDialogWithIconButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A510E2E2A20ACF00049FC5F /* JEConfirmationDialogWithIconButtons.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1A12B7C92A1B3C63003E40E4 /* PBXContainerItemProxy */ = {
+		1A510E122A20AC060049FC5F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 1A12B7B02A1B3C62003E40E4 /* Project object */;
+			containerPortal = 1A510DF92A20AC040049FC5F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 1A12B7B72A1B3C62003E40E4;
-			remoteInfo = JEConfirmationDialogWithIcons;
+			remoteGlobalIDString = 1A510E002A20AC050049FC5F;
+			remoteInfo = JEConfirmationDialogWithIconButtonsExample;
 		};
-		1A12B7D32A1B3C63003E40E4 /* PBXContainerItemProxy */ = {
+		1A510E1C2A20AC060049FC5F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 1A12B7B02A1B3C62003E40E4 /* Project object */;
+			containerPortal = 1A510DF92A20AC040049FC5F /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 1A12B7B72A1B3C62003E40E4;
-			remoteInfo = JEConfirmationDialogWithIcons;
+			remoteGlobalIDString = 1A510E002A20AC050049FC5F;
+			remoteInfo = JEConfirmationDialogWithIconButtonsExample;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1A12B7B82A1B3C62003E40E4 /* JEConfirmationDialogWithIcons.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JEConfirmationDialogWithIcons.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A12B7BB2A1B3C62003E40E4 /* JEConfirmationDialogWithIconsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JEConfirmationDialogWithIconsApp.swift; sourceTree = "<group>"; };
-		1A12B7BD2A1B3C62003E40E4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		1A12B7BF2A1B3C63003E40E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1A12B7C22A1B3C63003E40E4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		1A12B7C82A1B3C63003E40E4 /* JEConfirmationDialogWithIconsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JEConfirmationDialogWithIconsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A12B7CC2A1B3C63003E40E4 /* JEConfirmationDialogWithIconsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JEConfirmationDialogWithIconsTests.swift; sourceTree = "<group>"; };
-		1A12B7D22A1B3C63003E40E4 /* JEConfirmationDialogWithIconsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JEConfirmationDialogWithIconsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A12B7D62A1B3C63003E40E4 /* JEConfirmationDialogWithIconsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JEConfirmationDialogWithIconsUITests.swift; sourceTree = "<group>"; };
-		1A12B7D82A1B3C63003E40E4 /* JEConfirmationDialogWithIconsUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JEConfirmationDialogWithIconsUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		1A510E012A20AC050049FC5F /* JEConfirmationDialogWithIconButtonsExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JEConfirmationDialogWithIconButtonsExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A510E042A20AC050049FC5F /* JEConfirmationDialogWithIconButtonsExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JEConfirmationDialogWithIconButtonsExampleApp.swift; sourceTree = "<group>"; };
+		1A510E062A20AC050049FC5F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		1A510E082A20AC060049FC5F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1A510E0B2A20AC060049FC5F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1A510E112A20AC060049FC5F /* JEConfirmationDialogWithIconButtonsExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JEConfirmationDialogWithIconButtonsExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A510E1B2A20AC060049FC5F /* JEConfirmationDialogWithIconButtonsExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JEConfirmationDialogWithIconButtonsExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A510E2E2A20ACF00049FC5F /* JEConfirmationDialogWithIconButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = JEConfirmationDialogWithIconButtons.swift; path = ../../Sources/JEConfirmationDialogWithIconButtons.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		1A12B7B52A1B3C62003E40E4 /* Frameworks */ = {
+		1A510DFE2A20AC050049FC5F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A12B7C52A1B3C63003E40E4 /* Frameworks */ = {
+		1A510E0E2A20AC060049FC5F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A12B7CF2A1B3C63003E40E4 /* Frameworks */ = {
+		1A510E182A20AC060049FC5F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -71,142 +67,124 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1A12B7AF2A1B3C62003E40E4 = {
+		1A510DF82A20AC040049FC5F = {
 			isa = PBXGroup;
 			children = (
-				1A12B7BA2A1B3C62003E40E4 /* JEConfirmationDialogWithIcons */,
-				1A12B7CB2A1B3C63003E40E4 /* JEConfirmationDialogWithIconsTests */,
-				1A12B7D52A1B3C63003E40E4 /* JEConfirmationDialogWithIconsUITests */,
-				1A12B7B92A1B3C62003E40E4 /* Products */,
+				1A510E032A20AC050049FC5F /* JEConfirmationDialogWithIconButtonsExample */,
+				1A510E022A20AC050049FC5F /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		1A12B7B92A1B3C62003E40E4 /* Products */ = {
+		1A510E022A20AC050049FC5F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1A12B7B82A1B3C62003E40E4 /* JEConfirmationDialogWithIcons.app */,
-				1A12B7C82A1B3C63003E40E4 /* JEConfirmationDialogWithIconsTests.xctest */,
-				1A12B7D22A1B3C63003E40E4 /* JEConfirmationDialogWithIconsUITests.xctest */,
+				1A510E012A20AC050049FC5F /* JEConfirmationDialogWithIconButtonsExample.app */,
+				1A510E112A20AC060049FC5F /* JEConfirmationDialogWithIconButtonsExampleTests.xctest */,
+				1A510E1B2A20AC060049FC5F /* JEConfirmationDialogWithIconButtonsExampleUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1A12B7BA2A1B3C62003E40E4 /* JEConfirmationDialogWithIcons */ = {
+		1A510E032A20AC050049FC5F /* JEConfirmationDialogWithIconButtonsExample */ = {
 			isa = PBXGroup;
 			children = (
-				1A12B7BB2A1B3C62003E40E4 /* JEConfirmationDialogWithIconsApp.swift */,
-				1A12B7BD2A1B3C62003E40E4 /* ContentView.swift */,
-				1A12B7BF2A1B3C63003E40E4 /* Assets.xcassets */,
-				1A12B7C12A1B3C63003E40E4 /* Preview Content */,
+				1A510E2E2A20ACF00049FC5F /* JEConfirmationDialogWithIconButtons.swift */,
+				1A510E042A20AC050049FC5F /* JEConfirmationDialogWithIconButtonsExampleApp.swift */,
+				1A510E062A20AC050049FC5F /* ContentView.swift */,
+				1A510E082A20AC060049FC5F /* Assets.xcassets */,
+				1A510E0A2A20AC060049FC5F /* Preview Content */,
 			);
-			path = JEConfirmationDialogWithIcons;
+			path = JEConfirmationDialogWithIconButtonsExample;
 			sourceTree = "<group>";
 		};
-		1A12B7C12A1B3C63003E40E4 /* Preview Content */ = {
+		1A510E0A2A20AC060049FC5F /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				1A12B7C22A1B3C63003E40E4 /* Preview Assets.xcassets */,
+				1A510E0B2A20AC060049FC5F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		1A12B7CB2A1B3C63003E40E4 /* JEConfirmationDialogWithIconsTests */ = {
-			isa = PBXGroup;
-			children = (
-				1A12B7CC2A1B3C63003E40E4 /* JEConfirmationDialogWithIconsTests.swift */,
-			);
-			path = JEConfirmationDialogWithIconsTests;
-			sourceTree = "<group>";
-		};
-		1A12B7D52A1B3C63003E40E4 /* JEConfirmationDialogWithIconsUITests */ = {
-			isa = PBXGroup;
-			children = (
-				1A12B7D62A1B3C63003E40E4 /* JEConfirmationDialogWithIconsUITests.swift */,
-				1A12B7D82A1B3C63003E40E4 /* JEConfirmationDialogWithIconsUITestsLaunchTests.swift */,
-			);
-			path = JEConfirmationDialogWithIconsUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1A12B7B72A1B3C62003E40E4 /* JEConfirmationDialogWithIcons */ = {
+		1A510E002A20AC050049FC5F /* JEConfirmationDialogWithIconButtonsExample */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1A12B7DC2A1B3C63003E40E4 /* Build configuration list for PBXNativeTarget "JEConfirmationDialogWithIcons" */;
+			buildConfigurationList = 1A510E252A20AC060049FC5F /* Build configuration list for PBXNativeTarget "JEConfirmationDialogWithIconButtonsExample" */;
 			buildPhases = (
-				1A12B7B42A1B3C62003E40E4 /* Sources */,
-				1A12B7B52A1B3C62003E40E4 /* Frameworks */,
-				1A12B7B62A1B3C62003E40E4 /* Resources */,
+				1A510DFD2A20AC050049FC5F /* Sources */,
+				1A510DFE2A20AC050049FC5F /* Frameworks */,
+				1A510DFF2A20AC050049FC5F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = JEConfirmationDialogWithIcons;
-			productName = JEConfirmationDialogWithIcons;
-			productReference = 1A12B7B82A1B3C62003E40E4 /* JEConfirmationDialogWithIcons.app */;
+			name = JEConfirmationDialogWithIconButtonsExample;
+			productName = JEConfirmationDialogWithIconButtonsExample;
+			productReference = 1A510E012A20AC050049FC5F /* JEConfirmationDialogWithIconButtonsExample.app */;
 			productType = "com.apple.product-type.application";
 		};
-		1A12B7C72A1B3C63003E40E4 /* JEConfirmationDialogWithIconsTests */ = {
+		1A510E102A20AC060049FC5F /* JEConfirmationDialogWithIconButtonsExampleTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1A12B7DF2A1B3C63003E40E4 /* Build configuration list for PBXNativeTarget "JEConfirmationDialogWithIconsTests" */;
+			buildConfigurationList = 1A510E282A20AC060049FC5F /* Build configuration list for PBXNativeTarget "JEConfirmationDialogWithIconButtonsExampleTests" */;
 			buildPhases = (
-				1A12B7C42A1B3C63003E40E4 /* Sources */,
-				1A12B7C52A1B3C63003E40E4 /* Frameworks */,
-				1A12B7C62A1B3C63003E40E4 /* Resources */,
+				1A510E0D2A20AC060049FC5F /* Sources */,
+				1A510E0E2A20AC060049FC5F /* Frameworks */,
+				1A510E0F2A20AC060049FC5F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1A12B7CA2A1B3C63003E40E4 /* PBXTargetDependency */,
+				1A510E132A20AC060049FC5F /* PBXTargetDependency */,
 			);
-			name = JEConfirmationDialogWithIconsTests;
-			productName = JEConfirmationDialogWithIconsTests;
-			productReference = 1A12B7C82A1B3C63003E40E4 /* JEConfirmationDialogWithIconsTests.xctest */;
+			name = JEConfirmationDialogWithIconButtonsExampleTests;
+			productName = JEConfirmationDialogWithIconButtonsExampleTests;
+			productReference = 1A510E112A20AC060049FC5F /* JEConfirmationDialogWithIconButtonsExampleTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		1A12B7D12A1B3C63003E40E4 /* JEConfirmationDialogWithIconsUITests */ = {
+		1A510E1A2A20AC060049FC5F /* JEConfirmationDialogWithIconButtonsExampleUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1A12B7E22A1B3C63003E40E4 /* Build configuration list for PBXNativeTarget "JEConfirmationDialogWithIconsUITests" */;
+			buildConfigurationList = 1A510E2B2A20AC060049FC5F /* Build configuration list for PBXNativeTarget "JEConfirmationDialogWithIconButtonsExampleUITests" */;
 			buildPhases = (
-				1A12B7CE2A1B3C63003E40E4 /* Sources */,
-				1A12B7CF2A1B3C63003E40E4 /* Frameworks */,
-				1A12B7D02A1B3C63003E40E4 /* Resources */,
+				1A510E172A20AC060049FC5F /* Sources */,
+				1A510E182A20AC060049FC5F /* Frameworks */,
+				1A510E192A20AC060049FC5F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				1A12B7D42A1B3C63003E40E4 /* PBXTargetDependency */,
+				1A510E1D2A20AC060049FC5F /* PBXTargetDependency */,
 			);
-			name = JEConfirmationDialogWithIconsUITests;
-			productName = JEConfirmationDialogWithIconsUITests;
-			productReference = 1A12B7D22A1B3C63003E40E4 /* JEConfirmationDialogWithIconsUITests.xctest */;
+			name = JEConfirmationDialogWithIconButtonsExampleUITests;
+			productName = JEConfirmationDialogWithIconButtonsExampleUITests;
+			productReference = 1A510E1B2A20AC060049FC5F /* JEConfirmationDialogWithIconButtonsExampleUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		1A12B7B02A1B3C62003E40E4 /* Project object */ = {
+		1A510DF92A20AC040049FC5F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
-					1A12B7B72A1B3C62003E40E4 = {
+					1A510E002A20AC050049FC5F = {
 						CreatedOnToolsVersion = 14.3;
 					};
-					1A12B7C72A1B3C63003E40E4 = {
+					1A510E102A20AC060049FC5F = {
 						CreatedOnToolsVersion = 14.3;
-						TestTargetID = 1A12B7B72A1B3C62003E40E4;
+						TestTargetID = 1A510E002A20AC050049FC5F;
 					};
-					1A12B7D12A1B3C63003E40E4 = {
+					1A510E1A2A20AC060049FC5F = {
 						CreatedOnToolsVersion = 14.3;
-						TestTargetID = 1A12B7B72A1B3C62003E40E4;
+						TestTargetID = 1A510E002A20AC050049FC5F;
 					};
 				};
 			};
-			buildConfigurationList = 1A12B7B32A1B3C62003E40E4 /* Build configuration list for PBXProject "JEConfirmationDialogWithIcons" */;
+			buildConfigurationList = 1A510DFC2A20AC040049FC5F /* Build configuration list for PBXProject "JEConfirmationDialogWithIconButtonsExample" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -214,36 +192,36 @@
 				en,
 				Base,
 			);
-			mainGroup = 1A12B7AF2A1B3C62003E40E4;
-			productRefGroup = 1A12B7B92A1B3C62003E40E4 /* Products */;
+			mainGroup = 1A510DF82A20AC040049FC5F;
+			productRefGroup = 1A510E022A20AC050049FC5F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1A12B7B72A1B3C62003E40E4 /* JEConfirmationDialogWithIcons */,
-				1A12B7C72A1B3C63003E40E4 /* JEConfirmationDialogWithIconsTests */,
-				1A12B7D12A1B3C63003E40E4 /* JEConfirmationDialogWithIconsUITests */,
+				1A510E002A20AC050049FC5F /* JEConfirmationDialogWithIconButtonsExample */,
+				1A510E102A20AC060049FC5F /* JEConfirmationDialogWithIconButtonsExampleTests */,
+				1A510E1A2A20AC060049FC5F /* JEConfirmationDialogWithIconButtonsExampleUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		1A12B7B62A1B3C62003E40E4 /* Resources */ = {
+		1A510DFF2A20AC050049FC5F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A12B7C32A1B3C63003E40E4 /* Preview Assets.xcassets in Resources */,
-				1A12B7C02A1B3C63003E40E4 /* Assets.xcassets in Resources */,
+				1A510E0C2A20AC060049FC5F /* Preview Assets.xcassets in Resources */,
+				1A510E092A20AC060049FC5F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A12B7C62A1B3C63003E40E4 /* Resources */ = {
+		1A510E0F2A20AC060049FC5F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A12B7D02A1B3C63003E40E4 /* Resources */ = {
+		1A510E192A20AC060049FC5F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -253,49 +231,47 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		1A12B7B42A1B3C62003E40E4 /* Sources */ = {
+		1A510DFD2A20AC050049FC5F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A12B7BE2A1B3C62003E40E4 /* ContentView.swift in Sources */,
-				1A12B7BC2A1B3C62003E40E4 /* JEConfirmationDialogWithIconsApp.swift in Sources */,
+				1A510E072A20AC050049FC5F /* ContentView.swift in Sources */,
+				1A510E052A20AC050049FC5F /* JEConfirmationDialogWithIconButtonsExampleApp.swift in Sources */,
+				1A510E2F2A20ACF00049FC5F /* JEConfirmationDialogWithIconButtons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A12B7C42A1B3C63003E40E4 /* Sources */ = {
+		1A510E0D2A20AC060049FC5F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A12B7CD2A1B3C63003E40E4 /* JEConfirmationDialogWithIconsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		1A12B7CE2A1B3C63003E40E4 /* Sources */ = {
+		1A510E172A20AC060049FC5F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A12B7D72A1B3C63003E40E4 /* JEConfirmationDialogWithIconsUITests.swift in Sources */,
-				1A12B7D92A1B3C63003E40E4 /* JEConfirmationDialogWithIconsUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1A12B7CA2A1B3C63003E40E4 /* PBXTargetDependency */ = {
+		1A510E132A20AC060049FC5F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1A12B7B72A1B3C62003E40E4 /* JEConfirmationDialogWithIcons */;
-			targetProxy = 1A12B7C92A1B3C63003E40E4 /* PBXContainerItemProxy */;
+			target = 1A510E002A20AC050049FC5F /* JEConfirmationDialogWithIconButtonsExample */;
+			targetProxy = 1A510E122A20AC060049FC5F /* PBXContainerItemProxy */;
 		};
-		1A12B7D42A1B3C63003E40E4 /* PBXTargetDependency */ = {
+		1A510E1D2A20AC060049FC5F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 1A12B7B72A1B3C62003E40E4 /* JEConfirmationDialogWithIcons */;
-			targetProxy = 1A12B7D32A1B3C63003E40E4 /* PBXContainerItemProxy */;
+			target = 1A510E002A20AC050049FC5F /* JEConfirmationDialogWithIconButtonsExample */;
+			targetProxy = 1A510E1C2A20AC060049FC5F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		1A12B7DA2A1B3C63003E40E4 /* Debug */ = {
+		1A510E232A20AC060049FC5F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -355,7 +331,7 @@
 			};
 			name = Debug;
 		};
-		1A12B7DB2A1B3C63003E40E4 /* Release */ = {
+		1A510E242A20AC060049FC5F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -409,14 +385,14 @@
 			};
 			name = Release;
 		};
-		1A12B7DD2A1B3C63003E40E4 /* Debug */ = {
+		1A510E262A20AC060049FC5F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"JEConfirmationDialogWithIcons/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"JEConfirmationDialogWithIconButtonsExample/Preview Content\"";
 				DEVELOPMENT_TEAM = P68VLQ6LPN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -430,7 +406,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jeon.JEConfirmationDialogWithIcons;
+				PRODUCT_BUNDLE_IDENTIFIER = jeon.JEConfirmationDialogWithIconButtonsExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -438,14 +414,14 @@
 			};
 			name = Debug;
 		};
-		1A12B7DE2A1B3C63003E40E4 /* Release */ = {
+		1A510E272A20AC060049FC5F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"JEConfirmationDialogWithIcons/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"JEConfirmationDialogWithIconButtonsExample/Preview Content\"";
 				DEVELOPMENT_TEAM = P68VLQ6LPN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -459,7 +435,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jeon.JEConfirmationDialogWithIcons;
+				PRODUCT_BUNDLE_IDENTIFIER = jeon.JEConfirmationDialogWithIconButtonsExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -467,7 +443,7 @@
 			};
 			name = Release;
 		};
-		1A12B7E02A1B3C63003E40E4 /* Debug */ = {
+		1A510E292A20AC060049FC5F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -478,16 +454,16 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jeon.JEConfirmationDialogWithIconsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = jeon.JEConfirmationDialogWithIconButtonsExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JEConfirmationDialogWithIcons.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/JEConfirmationDialogWithIcons";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JEConfirmationDialogWithIconButtonsExample.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/JEConfirmationDialogWithIconButtonsExample";
 			};
 			name = Debug;
 		};
-		1A12B7E12A1B3C63003E40E4 /* Release */ = {
+		1A510E2A2A20AC060049FC5F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -498,16 +474,16 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jeon.JEConfirmationDialogWithIconsTests;
+				PRODUCT_BUNDLE_IDENTIFIER = jeon.JEConfirmationDialogWithIconButtonsExampleTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JEConfirmationDialogWithIcons.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/JEConfirmationDialogWithIcons";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JEConfirmationDialogWithIconButtonsExample.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/JEConfirmationDialogWithIconButtonsExample";
 			};
 			name = Release;
 		};
-		1A12B7E32A1B3C63003E40E4 /* Debug */ = {
+		1A510E2C2A20AC060049FC5F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -516,16 +492,16 @@
 				DEVELOPMENT_TEAM = P68VLQ6LPN;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jeon.JEConfirmationDialogWithIconsUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = jeon.JEConfirmationDialogWithIconButtonsExampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = JEConfirmationDialogWithIcons;
+				TEST_TARGET_NAME = JEConfirmationDialogWithIconButtonsExample;
 			};
 			name = Debug;
 		};
-		1A12B7E42A1B3C63003E40E4 /* Release */ = {
+		1A510E2D2A20AC060049FC5F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -534,55 +510,55 @@
 				DEVELOPMENT_TEAM = P68VLQ6LPN;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = jeon.JEConfirmationDialogWithIconsUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = jeon.JEConfirmationDialogWithIconButtonsExampleUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = JEConfirmationDialogWithIcons;
+				TEST_TARGET_NAME = JEConfirmationDialogWithIconButtonsExample;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1A12B7B32A1B3C62003E40E4 /* Build configuration list for PBXProject "JEConfirmationDialogWithIcons" */ = {
+		1A510DFC2A20AC040049FC5F /* Build configuration list for PBXProject "JEConfirmationDialogWithIconButtonsExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1A12B7DA2A1B3C63003E40E4 /* Debug */,
-				1A12B7DB2A1B3C63003E40E4 /* Release */,
+				1A510E232A20AC060049FC5F /* Debug */,
+				1A510E242A20AC060049FC5F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1A12B7DC2A1B3C63003E40E4 /* Build configuration list for PBXNativeTarget "JEConfirmationDialogWithIcons" */ = {
+		1A510E252A20AC060049FC5F /* Build configuration list for PBXNativeTarget "JEConfirmationDialogWithIconButtonsExample" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1A12B7DD2A1B3C63003E40E4 /* Debug */,
-				1A12B7DE2A1B3C63003E40E4 /* Release */,
+				1A510E262A20AC060049FC5F /* Debug */,
+				1A510E272A20AC060049FC5F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1A12B7DF2A1B3C63003E40E4 /* Build configuration list for PBXNativeTarget "JEConfirmationDialogWithIconsTests" */ = {
+		1A510E282A20AC060049FC5F /* Build configuration list for PBXNativeTarget "JEConfirmationDialogWithIconButtonsExampleTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1A12B7E02A1B3C63003E40E4 /* Debug */,
-				1A12B7E12A1B3C63003E40E4 /* Release */,
+				1A510E292A20AC060049FC5F /* Debug */,
+				1A510E2A2A20AC060049FC5F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		1A12B7E22A1B3C63003E40E4 /* Build configuration list for PBXNativeTarget "JEConfirmationDialogWithIconsUITests" */ = {
+		1A510E2B2A20AC060049FC5F /* Build configuration list for PBXNativeTarget "JEConfirmationDialogWithIconButtonsExampleUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1A12B7E32A1B3C63003E40E4 /* Debug */,
-				1A12B7E42A1B3C63003E40E4 /* Release */,
+				1A510E2C2A20AC060049FC5F /* Debug */,
+				1A510E2D2A20AC060049FC5F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 1A12B7B02A1B3C62003E40E4 /* Project object */;
+	rootObject = 1A510DF92A20AC040049FC5F /* Project object */;
 }
