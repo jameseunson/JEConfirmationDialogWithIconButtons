@@ -54,6 +54,13 @@ struct ContentView: View {
 
 <img src="Assets/example.jpg" width="300" alt="An example sheet using this framework with three options, with an icon alongside each one.">
 
+### Known Bugs
+These issues are currently being worked on and will be resolved soon.
+
+- Labels with images do not yet align properly if images are variable width
+- Border unintentionally appears on top of the sheet if message is not visible
+- Displaying the dialog in the example app causes the screen to 'jump' vertically.
+
 ### License
 
 ```
